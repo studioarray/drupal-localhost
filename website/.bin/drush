@@ -1,0 +1,5 @@
+#!/bin/sh
+  export PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin
+  # docker-compose run --rm -w /var/www/public_html web /drush/drush $@
+  # docker-compose run --rm -w /var/www/public_html -e XDEBUG_CONFIG="idekey=PHPSTORM" -e PHP_IDE_CONFIG="serverName=www.furninova.dev" --user="root" web /root/.composer/vendor/bin/drush --root="/var/www/public_html" $@
+  docker-compose run --rm -w /var/www/website/public_html --user="root" -e PHP_IDE_CONFIG="serverName=www.WEBSITE_URI.localhost" web /root/.composer/vendor/bin/drush $@

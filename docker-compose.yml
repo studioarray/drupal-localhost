@@ -1,0 +1,32 @@
+version: '2'
+services:
+  web:
+    build: .docker/web
+    volumes:
+      - ./website:/var/www/website
+    links:
+      - db
+    environment:
+      VIRTUAL_HOST: www.WEBSITE_URI.localhost,WEBSITE_URI.localhost
+      VIRTUAL_PORT: "80"
+      USER: jens
+      UID: "501"
+    ports:
+      - "80:80"
+      - "443:443"
+  db:
+    image: mariadb
+    ports:
+      - "3306:3306"
+    volumes:
+      - "./db:/var/lib/mysql"
+    environment:
+      MYSQL_ROOT_PASSWORD: qwerty
+      MYSQL_USER: dev
+      MYSQL_PASSWORD: qwerty
+      MYSQL_DATABASE: database
+  drush:
+    image: drush/drush
+    volumes_from:
+      - web
+
